@@ -23,7 +23,7 @@ allDirs "runGet"
 
 # generate localization keys
 cd "core" || exit
-dart run easy_localization:generate -f keys -o locale_keys.g.dart -O lib/src/localization/generated -S resources/lang
+dart run easy_localization:generate -f keys -o locale_keys.g.dart -O lib/src/localization/generated -S languages
 
 # generate data layer files
 cd "../data" || exit

@@ -13,7 +13,7 @@ final class ThemeRepositoryImpl implements ThemeRepository {
   @override
   AppTheme get fetchAppTheme {
     final String? appTheme =
-        _keyValueStorageProvider.read<String>(AppConstants.appThemeStorageFlag);
+        _keyValueStorageProvider.read<String>(AppConstants.APP_THEME_STORAGE_FLAG);
     return appTheme != null
         ? AppTheme.values.byName(appTheme)
         : AppTheme.lightTheme;
@@ -22,7 +22,7 @@ final class ThemeRepositoryImpl implements ThemeRepository {
   @override
   Future<void> setAppTheme(AppTheme newAppTheme) async {
     await _keyValueStorageProvider.write(
-      AppConstants.appThemeStorageFlag,
+      AppConstants.APP_THEME_STORAGE_FLAG,
       newAppTheme.name,
     );
   }

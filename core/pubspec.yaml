@@ -21,6 +21,10 @@ dependencies:
   #State management
   flutter_bloc: ^8.1.4
 
+  #Network
+  observe_internet_connectivity: ^1.0.2
+  http: ^1.2.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

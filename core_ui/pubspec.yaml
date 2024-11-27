@@ -8,9 +8,14 @@ dependencies:
   flutter:
     sdk: flutter
 
+  core:
+    path: ../core
+  
+  domain:
+    path: ../domain
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^4.0.0
 
-flutter:
+

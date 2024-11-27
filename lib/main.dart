@@ -10,7 +10,9 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
 
-  //TODO: init DI
+  AppDI.initDependencies(appLocator);
+  await DataDI.initDependencies(appLocator);
+  DomainDI.initDependencies(appLocator);
 
   runApp(const RickAndMortyApp());
 }
@@ -24,17 +26,23 @@ class RickAndMortyApp extends StatelessWidget {
       path: AppLocalization.langFolderPath,
       supportedLocales: AppLocalization.supportedLocales,
       fallbackLocale: AppLocalization.fallbackLocale,
-      child: Builder(
-        builder: (BuildContext context) {
-          return MaterialApp.router(
-            debugShowCheckedModeBanner: false,
-            // routerConfig: appRouter.config(),
-            localizationsDelegates: context.localizationDelegates,
-            supportedLocales: context.supportedLocales,
-            locale: context.locale,
-            // theme: lightTheme,
-          );
-        },
+      child: BlocProvider(
+        create: (_) => ThemeBloc(
+          fetchAppThemeUsecase: appLocator.get<FetchAppThemeUsecase>(),
+          setAppThemeUsecase: appLocator.get<SetAppThemeUsecase>(),
+        ),
+        child: BlocBuilder<ThemeBloc, ThemeState>(
+          builder: (_, ThemeState themeState) {
+            return MaterialApp.router(
+              debugShowCheckedModeBanner: false,
+              // routerConfig: appRouter.config(),
+              localizationsDelegates: context.localizationDelegates,
+              supportedLocales: context.supportedLocales,
+              locale: context.locale,
+              theme: themeState.currentThemeData,
+            );
+          },
+        ),
       ),
     );
   }

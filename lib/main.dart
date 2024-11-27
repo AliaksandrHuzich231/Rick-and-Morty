@@ -1,6 +1,19 @@
 import 'package:flutter/material.dart';
 
-void main() {
+import 'package:core/core.dart';
+import 'package:core_ui/core_ui.dart';
+import 'package:data/data.dart';
+import 'package:domain/domain.dart';
+import 'package:navigation/navigation.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
+
+  AppDI.initDependencies(appLocator);
+  await DataDI.initDependencies(appLocator);
+  DomainDI.initDependencies(appLocator);
+
   runApp(const RickAndMortyApp());
 }
 
@@ -9,6 +22,28 @@ class RickAndMortyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox.shrink();
+    return EasyLocalization(
+      path: AppLocalization.langFolderPath,
+      supportedLocales: AppLocalization.supportedLocales,
+      fallbackLocale: AppLocalization.fallbackLocale,
+      child: BlocProvider(
+        create: (_) => ThemeBloc(
+          fetchAppThemeUsecase: appLocator.get<FetchAppThemeUsecase>(),
+          setAppThemeUsecase: appLocator.get<SetAppThemeUsecase>(),
+        ),
+        child: BlocBuilder<ThemeBloc, ThemeState>(
+          builder: (_, ThemeState themeState) {
+            return MaterialApp.router(
+              debugShowCheckedModeBanner: false,
+              // routerConfig: appRouter.config(),
+              localizationsDelegates: context.localizationDelegates,
+              supportedLocales: context.supportedLocales,
+              locale: context.locale,
+              theme: themeState.currentThemeData,
+            );
+          },
+        ),
+      ),
+    );
   }
 }

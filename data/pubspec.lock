@@ -311,6 +311,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.2"
+  http:
+    dependency: transitive
+    description:
+      name: http
+      sha256: b9c29a161230ee03d3ccf545097fccd9b87a5264228c5d348202e0f0c28f9010
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.2"
   http_multi_server:
     dependency: transitive
     description:
@@ -439,6 +447,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
+  observe_internet_connectivity:
+    dependency: transitive
+    description:
+      name: observe_internet_connectivity
+      sha256: "4b21b4b771cd408c43e23879b5db8901610caccb39e64d9763eed05f86bb33bd"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.2"
   package_config:
     dependency: transitive
     description:

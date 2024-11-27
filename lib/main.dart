@@ -13,6 +13,7 @@ Future<void> main() async {
   AppDI.initDependencies(appLocator);
   await DataDI.initDependencies(appLocator);
   DomainDI.initDependencies(appLocator);
+  NavigationDI.initDependencies(appLocator);
 
   runApp(const RickAndMortyApp());
 }
@@ -32,10 +33,10 @@ class RickAndMortyApp extends StatelessWidget {
           setAppThemeUsecase: appLocator.get<SetAppThemeUsecase>(),
         ),
         child: BlocBuilder<ThemeBloc, ThemeState>(
-          builder: (_, ThemeState themeState) {
+          builder: (BuildContext context, ThemeState themeState) {
             return MaterialApp.router(
               debugShowCheckedModeBanner: false,
-              // routerConfig: appRouter.config(),
+              routerConfig: appLocator.get<AppRouter>().config(),
               localizationsDelegates: context.localizationDelegates,
               supportedLocales: context.supportedLocales,
               locale: context.locale,

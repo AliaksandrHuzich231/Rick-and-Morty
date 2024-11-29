@@ -1,16 +1,17 @@
 import 'package:core_ui/core_ui.dart';
 
 import '../../../domain.dart';
+import '../base_usecase.dart';
 
-final class SetAppThemeUsecase extends FutureUseCase<AppTheme, void> {
+final class FetchAppThemeUsecase extends UseCase<NoParams, AppTheme> {
   final ThemeRepository _themeRepository;
 
-  const SetAppThemeUsecase({
+  const FetchAppThemeUsecase({
     required ThemeRepository themeRepository,
   }) : _themeRepository = themeRepository;
 
   @override
-  Future<void> execute(AppTheme input) async {
-    await _themeRepository.setAppTheme(input);
+  AppTheme execute(NoParams payload) {
+    return _themeRepository.fetchAppTheme();
   }
 }

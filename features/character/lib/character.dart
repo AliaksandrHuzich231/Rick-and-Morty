@@ -1,7 +1,6 @@
 library character;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export 'src/router/character_router.gr.dart';
+
+export 'src/character_list/ui/character_list_screen.dart';
+export 'src/character_list/bloc/character_list_bloc.dart';

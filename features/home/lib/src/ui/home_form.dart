@@ -5,16 +5,24 @@ class _HomeForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+
     return AutoTabsScaffold(
       routes: const <PageRouteInfo<dynamic>>[
+        CharacterListRoute(),
         SettingsRoute(),
       ],
       bottomNavigationBuilder: (_, TabsRouter tabsRouter) {
         return CurvedNavigationBar(
+          color: theme.navigationBarTheme
+              .backgroundColor ??
+              AppColors.transparent,
+          backgroundColor:  theme.scaffoldBackgroundColor,
           index: tabsRouter.activeIndex,
           onTap: tabsRouter.setActiveIndex,
           items: const <Widget>[
-            Icon(Icons.add_ic_call_outlined),
+            Icon(Icons.list),
+            Icon(Icons.settings),
           ],
         );
       },

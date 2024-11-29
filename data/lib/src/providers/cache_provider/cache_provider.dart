@@ -1,13 +1,21 @@
-part 'cache_provider_impl.dart';
+final class CacheProvider {
+  Future<void> delete(int id) {
+    // TODO: implement delete
+    throw UnimplementedError();
+  }
 
-abstract interface class CacheProvider {
-  factory CacheProvider() = _CacheProviderImpl;
+  Future<void> insert<T>(T value) {
+    // TODO: implement insert
+    throw UnimplementedError();
+  }
 
-  Future<void> insert<T>(T value);
+  Future<List<T>> retrieveAll<T>() {
+    // TODO: implement retrieveAll
+    throw UnimplementedError();
+  }
 
-  Future<List<T>> retrieveAll<T>();
-
-  Future<void> update<T>(T value);
-
-  Future<void> delete(int id);
+  Future<void> update<T>(T value) {
+    // TODO: implement update
+    throw UnimplementedError();
+  }
 }

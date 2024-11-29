@@ -1,5 +1,6 @@
 import 'package:core/core.dart';
 import 'package:domain/domain.dart';
+import 'package:domain/src/usecases/character/fetch_characters_usecase.dart';
 
 abstract final class DomainDI {
   static void initDependencies(GetIt locator) {
@@ -15,6 +16,12 @@ abstract final class DomainDI {
     locator.registerLazySingleton<SetAppThemeUsecase>(
       () => SetAppThemeUsecase(
         themeRepository: locator.get<ThemeRepository>(),
+      ),
+    );
+
+    locator.registerLazySingleton<FetchCharacterUsecase>(
+      () => FetchCharacterUsecase(
+        characterRepository: locator.get<CharacterRepository>(),
       ),
     );
   }

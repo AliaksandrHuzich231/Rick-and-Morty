@@ -1,12 +1,8 @@
 import 'package:core_ui/core_ui.dart';
-import 'package:data/data.dart';
+import 'package:domain/src/payloads/theme/set_app_theme_payload.dart';
 
 abstract interface class ThemeRepository {
-  factory ThemeRepository({
-    required KeyValueStorageProvider keyValueStorageProvider,
-  }) = ThemeRepositoryImpl;
+  AppTheme fetchAppTheme();
 
-  AppTheme get fetchAppTheme;
-
-  Future<void> setAppTheme(AppTheme newAppTheme);
+  Future<void> setAppTheme(SetAppThemePayload payload);
 }

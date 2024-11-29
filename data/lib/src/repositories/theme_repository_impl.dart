@@ -11,19 +11,20 @@ final class ThemeRepositoryImpl implements ThemeRepository {
   }) : _keyValueStorageProvider = keyValueStorageProvider;
 
   @override
-  AppTheme get fetchAppTheme {
-    final String? appTheme =
-        _keyValueStorageProvider.read<String>(AppConstants.APP_THEME_STORAGE_FLAG);
+  AppTheme fetchAppTheme() {
+    final String? appTheme = _keyValueStorageProvider.read<String>(
+      AppConstants.APP_THEME_STORAGE_FLAG,
+    );
     return appTheme != null
         ? AppTheme.values.byName(appTheme)
         : AppTheme.lightTheme;
   }
 
   @override
-  Future<void> setAppTheme(AppTheme newAppTheme) async {
+  Future<void> setAppTheme(SetAppThemePayload payload) async {
     await _keyValueStorageProvider.write(
       AppConstants.APP_THEME_STORAGE_FLAG,
-      newAppTheme.name,
+      payload.appTheme.name,
     );
   }
 }

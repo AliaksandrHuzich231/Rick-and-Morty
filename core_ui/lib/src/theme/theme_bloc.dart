@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'app_theme.dart';
 
 part 'theme_event.dart';
+
 part 'theme_state.dart';
 
 class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
@@ -40,6 +41,10 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
     Emitter emit,
   ) async {
     emit(state.copyWith(event.appTheme));
-    await _setAppThemeUsecase.execute(event.appTheme);
+    await _setAppThemeUsecase.execute(
+      SetAppThemePayload(
+        appTheme: event.appTheme,
+      ),
+    );
   }
 }

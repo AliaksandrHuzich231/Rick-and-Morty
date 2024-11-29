@@ -1,3 +1,4 @@
+import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 
 enum AppTheme {
@@ -20,9 +21,15 @@ extension AppThemeExtension on AppTheme {
 ThemeData _lightThemeData = ThemeData(
   brightness: Brightness.light,
   useMaterial3: true,
+  scaffoldBackgroundColor: AppColors.white,
 );
 
 ThemeData _darkThemeData = ThemeData(
   brightness: Brightness.dark,
   useMaterial3: true,
+  scaffoldBackgroundColor: AppColors.black,
+  primaryColor: AppColors.grey,
+  navigationBarTheme: const NavigationBarThemeData(
+    backgroundColor: AppColors.orange,
+  ),
 );

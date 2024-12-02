@@ -17,6 +17,13 @@ dependencies:
   core_ui:
     path: ../core_ui
 
+  #Network
+  json_annotation: ^4.9.0
+
+  #Staroges
+  shared_preferences: ^2.3.3
+  drift: ^2.22.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

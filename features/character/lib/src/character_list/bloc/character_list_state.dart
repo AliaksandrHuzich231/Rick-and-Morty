@@ -1,29 +1,28 @@
 part of 'character_list_bloc.dart';
 
 final class CharacterListState {
-  final int page;
   final List<Character> characters;
+  final PaginationInfo lastPaginationInfo;
 
   const CharacterListState({
-    required this.page,
     required this.characters,
+    required this.lastPaginationInfo,
   });
 
   factory CharacterListState.empty() {
-    return const CharacterListState(
-      page: 1,
+    return CharacterListState(
       characters: [],
+      lastPaginationInfo: PaginationInfo.empty(),
     );
   }
 
   CharacterListState copyWith({
-    int? page,
-    bool? isLoading,
     List<Character>? characters,
+    PaginationInfo? lastPaginationInfo,
   }) {
     return CharacterListState(
-      page: page ?? this.page,
       characters: characters ?? this.characters,
+      lastPaginationInfo: lastPaginationInfo ?? this.lastPaginationInfo,
     );
   }
 }

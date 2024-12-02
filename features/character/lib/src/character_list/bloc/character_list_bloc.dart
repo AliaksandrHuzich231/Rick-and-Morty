@@ -27,21 +27,19 @@ class CharacterListBloc extends Bloc<CharacterListEvent, CharacterListState> {
     LoadMoreCharacters event,
     Emitter emit,
   ) async {
-    emit(state.copyWith(isLoading: true));
-
-    final List<Character> characters = await _fetchCharacterUsecase.execute(
-      FetchCharactersPayload(
-        page: state.page,
+    final PaginatedModel<Character> charactersPaginatedModel =
+        await _fetchCharacterUsecase.execute(
+      PaginationPayload(
+        lastObjectId: state.characters.lastOrNull?.id,
+        nextPage: state.lastPaginationInfo.next,
       ),
     );
     emit(
       state.copyWith(
-        characters: state.characters + characters,
-        page: state.page + 1,
+        characters: state.characters + charactersPaginatedModel.results,
+        lastPaginationInfo: charactersPaginatedModel.info,
       ),
     );
-
-    emit(state.copyWith(isLoading: false));
   }
 
   Future<void> _onMoveToDetailsPage(

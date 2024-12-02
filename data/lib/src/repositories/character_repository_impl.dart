@@ -17,35 +17,29 @@ final class CharacterRepositoryImpl implements CharacterRepository {
         _apiProvider = apiProvider;
 
   @override
-  Future<List<Character>> fetchCharacters(
-    FetchCharactersPayload payload,
+  Future<PaginatedModel<Character>> fetchCharacters(
+    PaginationPayload payload,
   ) async {
-    final List<Character> characters = [];
+    PaginatedModel<Character> charactersPaginatedModel = PaginatedModel.empty();
     if (await NetworkService.hasConnection) {
-      characters.addAll(
-        await _apiProvider
-            .list<CharacterEntity>(
-              request: ApiRequest(
-                method: HttpMethod.get,
-                url: '${AppConstants.BASE_URL}/character/',
-                params: {
-                  'page': payload.page,
-                },
-              ),
-              parser: CharacterEntity.fromJson,
-            )
-            .then(
-              (list) => list
-                  .map(
-                    (entity) =>
-                        MapperFactory.characterMapper.fromEntity(entity),
-                  )
-                  .toList(),
+      charactersPaginatedModel = await _apiProvider
+          .object<PaginatedEntity<CharacterEntity>>(
+            request: ApiRequest(
+              method: HttpMethod.get,
+              url: payload.nextPage ?? ApiConstants.CHARACTERS_ENDPOINT,
             ),
-      );
-    } else {
-      //TODO call cache
-    }
-    return characters;
+            parser: (Map<String, dynamic> json) {
+              return PaginatedEntity<CharacterEntity>.fromJson(
+                json,
+                CharacterEntity.fromJson,
+              );
+            },
+          )
+          .then(
+            MapperFactory.paginatedMapper<CharacterEntity, Character>()
+                .fromEntity,
+          );
+    } else {}
+    return charactersPaginatedModel;
   }
 }

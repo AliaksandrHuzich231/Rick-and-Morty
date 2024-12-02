@@ -1,4 +1,4 @@
-import 'package:core/core.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 import '../../../data.dart';
 
@@ -43,7 +43,7 @@ final class CharacterEntity extends JsonSerializable {
     required this.createdAt,
   });
 
-  factory CharacterEntity.fromJson(Map<String, dynamic> json) {
-    return _$CharacterEntityFromJson(json);
+  factory CharacterEntity.fromJson(Object? json) {
+    return _$CharacterEntityFromJson(json as Map<String, dynamic>);
   }
 }

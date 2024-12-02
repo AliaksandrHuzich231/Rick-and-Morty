@@ -1,4 +1,4 @@
-import 'package:core/core.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final class KeyValueStorageProvider {
   final SharedPreferences _sharedPreferences;

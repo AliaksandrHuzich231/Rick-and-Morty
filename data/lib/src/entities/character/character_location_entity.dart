@@ -1,4 +1,4 @@
-import 'package:core/core.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'character_location_entity.g.dart';
 

@@ -30,8 +30,7 @@ class _CharacterListForm extends StatelessWidget {
               ),
               items: state.characters,
               isRecentSearch: false,
-              //TODO update this logic
-              isLastPage: state.page == 43,
+              isLastPage: state.lastPaginationInfo.isLastPage,
               onLoadMore: (_) {
                 context.read<CharacterListBloc>().add(
                       LoadMoreCharacters(),

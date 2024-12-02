@@ -10,5 +10,10 @@
     "location": "Location:",
     "type": "Type:",
     "species": "Species:"
+  },
+  "settings": {
+    "title": "Settings",
+    "light_theme": "Light Theme",
+    "dark_theme": "Dark Theme"
   }
 }

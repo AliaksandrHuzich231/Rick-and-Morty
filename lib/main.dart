@@ -40,7 +40,7 @@ class RickAndMortyApp extends StatelessWidget {
               localizationsDelegates: context.localizationDelegates,
               supportedLocales: context.supportedLocales,
               locale: context.locale,
-              theme: AppTheme.darkTheme.themeData,
+              theme: themeState.currentThemeData,
             );
           },
         ),

@@ -32,4 +32,7 @@ ThemeData _darkThemeData = ThemeData(
   navigationBarTheme: const NavigationBarThemeData(
     backgroundColor: AppColors.orange,
   ),
+  appBarTheme: const AppBarTheme(
+    color: AppColors.orange,
+  ),
 );

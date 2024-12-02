@@ -1,3 +1,5 @@
 part of 'settings_bloc.dart';
 
-sealed class SettingsEvent {}
+sealed class SettingsEvent {
+  const SettingsEvent();
+}

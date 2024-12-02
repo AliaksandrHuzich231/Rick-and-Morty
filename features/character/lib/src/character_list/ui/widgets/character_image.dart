@@ -12,11 +12,14 @@ class CharacterImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+
     return CachedNetworkImage(
       imageUrl: imageUrl,
       progressIndicatorBuilder: (context, url, downloadProgress) {
         return Center(
           child: CircularProgressIndicator(
+            color: theme.navigationBarTheme.backgroundColor,
             value: downloadProgress.progress,
           ),
         );

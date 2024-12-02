@@ -12,6 +12,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     required AppRouter appRouter,
   })  : _appRouter = appRouter,
         super(
-          HomeState(),
+          const HomeState(),
         );
 }

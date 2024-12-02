@@ -12,3 +12,4 @@ export 'src/constants/app_constants.dart';
 export 'src/di/app_di.dart';
 export 'src/localization/localization.dart';
 export 'src/services/services.dart';
+export 'src/utils/extensions.dart';

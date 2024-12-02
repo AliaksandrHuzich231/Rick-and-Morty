@@ -1,3 +1,4 @@
+import 'package:character/character.dart';
 import 'package:core/core.dart';
 import 'package:domain/domain.dart';
 import 'package:navigation/navigation.dart';
@@ -47,6 +48,10 @@ class CharacterListBloc extends Bloc<CharacterListEvent, CharacterListState> {
     MoveToDetailsPage event,
     Emitter emit,
   ) async {
-    //TODO navigate to details page
+    await _appRouter.push(
+      CharacterDetailsRoute(
+        character: event.character,
+      ),
+    );
   }
 }

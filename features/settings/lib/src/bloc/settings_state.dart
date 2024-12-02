@@ -1,3 +1,5 @@
 part of 'settings_bloc.dart';
 
-final class SettingsState {}
+final class SettingsState {
+  const SettingsState();
+}

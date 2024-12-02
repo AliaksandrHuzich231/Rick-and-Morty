@@ -12,6 +12,6 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     required AppRouter appRouter,
   })  : _appRouter = appRouter,
         super(
-          SettingsState(),
+          const SettingsState(),
         );
 }

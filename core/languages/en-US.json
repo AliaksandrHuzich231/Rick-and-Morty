@@ -1,5 +1,14 @@
 {
-  "common" : {
-    "example_key" : "Example Value"
+  "home": {
+    "list_label": "All characters",
+    "settings_label": "Settings"
+  },
+  "character_list": {
+    "title": "Character list"
+  },
+  "character_details": {
+    "location": "Location:",
+    "type": "Type:",
+    "species": "Species:"
   }
 }

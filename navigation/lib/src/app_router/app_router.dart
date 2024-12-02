@@ -23,5 +23,9 @@ class AppRouter extends RootStackRouter {
             ),
           ],
         ),
+        AutoRoute(
+          path: '/character-details',
+          page: CharacterDetailsRoute.page,
+        ),
       ];
 }

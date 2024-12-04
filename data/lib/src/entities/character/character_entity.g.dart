@@ -22,3 +22,18 @@ CharacterEntity _$CharacterEntityFromJson(Map<String, dynamic> json) =>
       characterUrl: json['url'] as String,
       createdAt: json['created'] as String,
     );
+
+Map<String, dynamic> _$CharacterEntityToJson(CharacterEntity instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'status': instance.status,
+      'species': instance.species,
+      'type': instance.type,
+      'gender': instance.gender,
+      'location': instance.characterLocationEntity,
+      'image': instance.imageUrl,
+      'episode': instance.episodes,
+      'url': instance.characterUrl,
+      'created': instance.createdAt,
+    };

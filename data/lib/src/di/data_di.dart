@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../config/config.dart';
 import '../errors/error_handler.dart';
+import '../providers/cache_provider/drift/drift.dart';
 
 abstract final class DataDI {
   static Future<void> initDependencies(GetIt locator) async {
@@ -35,14 +36,18 @@ abstract final class DataDI {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
 
+    locator.registerLazySingleton<AppDatabase>(AppDatabase.new);
+
+    locator.registerLazySingleton<CacheProvider>(
+      () => CacheProvider(
+        database: locator.get<AppDatabase>(),
+      ),
+    );
+
     locator.registerLazySingleton<KeyValueStorageProvider>(
       () => KeyValueStorageProvider(
         sharedPreferences: sharedPreferences,
       ),
-    );
-
-    locator.registerLazySingleton<CacheProvider>(
-      () => CacheProvider(),
     );
   }
 

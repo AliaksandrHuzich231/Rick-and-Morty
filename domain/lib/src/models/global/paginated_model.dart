@@ -1,3 +1,5 @@
+import 'package:core/core.dart';
+
 part 'pagination_info.dart';
 
 final class PaginatedModel<T> {

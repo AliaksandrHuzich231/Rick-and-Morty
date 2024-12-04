@@ -24,6 +24,14 @@ class CharacterInfo extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         Text(
+          character.id.toString(),
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+            fontSize: 20,
+          ),
+        ),
+        const SizedBox(height: 20),
+        Text(
           '${character.status.status} - ${character.gender.gender}',
           style: const TextStyle(
             fontSize: 12,

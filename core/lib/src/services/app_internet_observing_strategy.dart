@@ -1,9 +1,6 @@
-import 'package:http/http.dart';
-import 'package:observe_internet_connectivity/observe_internet_connectivity.dart';
+part of 'network_service.dart';
 
-import '../../core.dart';
-
-base class AppInternetObservingStrategy extends InternetObservingStrategy {
+final class _AppInternetObservingStrategy extends InternetObservingStrategy {
   @override
   Future<bool> get hasInternetConnection async {
     try {

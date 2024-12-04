@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'pagination_info_entity.g.dart';
 
-@JsonSerializable(createToJson: false)
+@JsonSerializable()
 final class PaginationInfoEntity extends JsonSerializable {
   @JsonKey(name: 'count')
   final int count;
@@ -23,4 +23,7 @@ final class PaginationInfoEntity extends JsonSerializable {
   factory PaginationInfoEntity.fromJson(Map<String, dynamic> json) {
     return _$PaginationInfoEntityFromJson(json);
   }
+
+  @override
+  Map<String, dynamic> toJson() => _$PaginationInfoEntityToJson(this);
 }

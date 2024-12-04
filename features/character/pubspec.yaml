@@ -21,7 +21,6 @@ dependencies:
     path: ../../navigation
 
   #UI
-  paginated_list: ^1.2.3
   cached_network_image: ^3.4.1
 
 dev_dependencies:

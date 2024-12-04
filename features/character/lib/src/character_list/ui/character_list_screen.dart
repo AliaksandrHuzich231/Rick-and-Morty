@@ -3,7 +3,6 @@ import 'package:core/core.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:navigation/navigation.dart';
-import 'package:paginated_list/paginated_list.dart';
 
 import '../bloc/character_list_bloc.dart';
 
@@ -20,7 +19,15 @@ class CharacterListScreen extends StatelessWidget {
         appRouter: appLocator.get<AppRouter>(),
         fetchCharacterUsecase: appLocator.get<FetchCharacterUsecase>(),
       ),
-      child: const _CharacterListForm(),
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            'character_list.title'.watchTr(context),
+          ),
+        ),
+        body: const _CharacterListForm(),
+      ),
     );
   }
 }

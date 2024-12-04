@@ -5,6 +5,7 @@ abstract class  LocaleKeys {
   static const home_settings_label = 'home.settings_label';
   static const home = 'home';
   static const character_list_title = 'character_list.title';
+  static const character_list_no_connection = 'character_list.no_connection';
   static const character_list = 'character_list';
   static const character_details_location = 'character_details.location';
   static const character_details_type = 'character_details.type';

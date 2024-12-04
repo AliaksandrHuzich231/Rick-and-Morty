@@ -4,7 +4,7 @@ import '../../../data.dart';
 
 part 'character_entity.g.dart';
 
-@JsonSerializable(createToJson: false)
+@JsonSerializable()
 final class CharacterEntity extends JsonSerializable {
   @JsonKey(name: 'id')
   final int id;
@@ -46,4 +46,7 @@ final class CharacterEntity extends JsonSerializable {
   factory CharacterEntity.fromJson(Object? json) {
     return _$CharacterEntityFromJson(json as Map<String, dynamic>);
   }
+
+  @override
+  Map<String, dynamic> toJson() => _$CharacterEntityToJson(this);
 }

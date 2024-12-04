@@ -1,5 +1,3 @@
-import 'package:core/core.dart';
-
 final class AppException implements Exception {
   final String message;
 
@@ -7,8 +5,19 @@ final class AppException implements Exception {
     required this.message,
   });
 
-  const AppException.unknown() : message = AppConstants.UNKNOWN_ERROR;
-
   @override
   String toString() => message;
+}
+
+enum AppExceptionType {
+  unknownAppException('Unknown app exception!'),
+  emptyResponse('Empty response'),
+  emptyMessage('Empty message'),
+  notAuthorized('Not authorized'),
+  serverError('Server error'),
+  noConnection('No connection');
+
+  final String message;
+
+  const AppExceptionType(this.message);
 }

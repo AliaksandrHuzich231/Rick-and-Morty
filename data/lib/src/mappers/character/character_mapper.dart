@@ -21,7 +21,10 @@ final class CharacterMapper
         (domain.CharacterStatus value) => value.status == entity.status,
         orElse: () => domain.CharacterStatus.unknown,
       ),
-      species: entity.species,
+      species: domain.CharacterSpecies.values.firstWhere(
+        (domain.CharacterSpecies value) => value.species == entity.species,
+        orElse: () => domain.CharacterSpecies.alien,
+      ),
       type: entity.type,
       gender: domain.CharacterGender.values.firstWhere(
         (domain.CharacterGender value) => value.gender == entity.gender,
@@ -42,7 +45,7 @@ final class CharacterMapper
       id: model.id,
       name: model.name,
       status: model.status.name,
-      species: model.species,
+      species: model.species.name,
       type: model.type,
       gender: model.gender.name,
       characterLocationEntity:

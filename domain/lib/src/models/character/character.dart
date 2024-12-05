@@ -6,7 +6,7 @@ final class Character {
   final int id;
   final String name;
   final CharacterStatus status;
-  final String species;
+  final CharacterSpecies species;
   final String type;
   final CharacterGender gender;
   final CharacterLocation characterLocation;

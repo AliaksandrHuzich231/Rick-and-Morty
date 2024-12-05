@@ -24,26 +24,8 @@ class CharacterDetailsScreen extends StatelessWidget {
       create: (_) => CharacterDetailsBloc(
         appRouter: appLocator.get<AppRouter>(),
       ),
-      child: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text(
-            character.name,
-          ),
-          leading: IconButton(
-            icon: const Icon(
-              Icons.arrow_back,
-            ),
-            onPressed: () {
-              context.read<CharacterDetailsBloc>().add(
-                    const BackToCharacterListPage(),
-                  );
-            },
-          ),
-        ),
-        body: _CharacterDetailsForm(
-          character: character,
-        ),
+      child: _CharacterDetailsForm(
+        character: character,
       ),
     );
   }

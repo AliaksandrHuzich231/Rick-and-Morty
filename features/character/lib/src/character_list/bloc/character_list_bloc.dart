@@ -66,6 +66,7 @@ class CharacterListBloc extends Bloc<CharacterListEvent, CharacterListState> {
           lastObjectId: state.characters.lastOrNull?.id,
           nextPage: state.lastPaginatedPageInfo.next,
           prevPage: state.lastPaginatedPageInfo.prev,
+          filter: null,
         ),
       );
       emit(

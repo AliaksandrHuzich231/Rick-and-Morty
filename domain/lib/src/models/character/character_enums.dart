@@ -10,6 +10,15 @@ enum CharacterStatus {
   const CharacterStatus(this.status);
 }
 
+enum CharacterSpecies {
+  alien('Alien'),
+  human('Human');
+
+  final String species;
+
+  const CharacterSpecies(this.species);
+}
+
 enum CharacterGender {
   female('Female'),
   male('Male'),

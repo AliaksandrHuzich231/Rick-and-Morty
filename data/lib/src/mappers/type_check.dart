@@ -1,6 +1,5 @@
-bool isNullableType<T>() => null is T;
+bool _isExactType<X, Y>() => X == Y;
 
-bool isTypeExactType<T, CT>() => T == CT;
-
-bool isTypeTypeOf<T, CT>() =>
-    isTypeExactType<T, CT>() || isTypeExactType<T, CT?>();
+bool isSameTypes<X, Y>() {
+  return _isExactType<X, Y>() || _isExactType<X, Y?>();
+}

@@ -25,11 +25,11 @@ abstract final class MapperFactory {
       );
 
   static Mapper<A, B> _factory<A, B>() {
-    if (isTypeTypeOf<A, CharacterEntity>()) {
+    if (isSameTypes<A, CharacterEntity>()) {
       return characterMapper as Mapper<A, B>;
     }
     throw const AppException(
-      message: AppConstants.UNSUPPORTED_GENERIC_TYPE,
+      message: DataConstants.UNSUPPORTED_GENERIC_TYPE,
     );
   }
 }

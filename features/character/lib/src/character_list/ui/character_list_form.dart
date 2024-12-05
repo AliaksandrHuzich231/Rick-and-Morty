@@ -32,6 +32,8 @@ class _CharacterListFormState extends State<_CharacterListForm> {
 
   @override
   Widget build(BuildContext context) {
+    final CharacterListBloc bloc = context.read<CharacterListBloc>();
+
     return BlocConsumer<CharacterListBloc, CharacterListState>(
       listenWhen: (
         CharacterListState prevState,
@@ -56,18 +58,26 @@ class _CharacterListFormState extends State<_CharacterListForm> {
         if (state.isLoading) {
           return const Center(child: CircularProgressIndicator());
         } else if (state.hasError) {
-          return const SizedBox.shrink();
+          return CharactersListRetry(
+            onRetry: () => bloc.add(InitialLoad()),
+            message: 'character_list.something_went_wrong'.watchTr(context),
+          );
+        } else if (state.characters.isEmpty) {
+          return CharactersListRetry(
+            onRetry: () => bloc.add(InitialLoad()),
+            message: 'character_list.no data'.watchTr(context),
+          );
         } else {
           return ListView.separated(
             controller: _scrollController,
             itemBuilder: (_, int index) {
               return CharacterTile(
                 onTap: () {
-                  context.read<CharacterListBloc>().add(
-                        MoveToDetailsPage(
-                          character: state.characters[index],
-                        ),
-                      );
+                  bloc.add(
+                    MoveToDetailsPage(
+                      character: state.characters[index],
+                    ),
+                  );
                 },
                 character: state.characters[index],
               );

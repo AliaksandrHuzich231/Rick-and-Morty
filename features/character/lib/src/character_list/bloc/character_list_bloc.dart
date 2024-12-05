@@ -39,7 +39,12 @@ class CharacterListBloc extends Bloc<CharacterListEvent, CharacterListState> {
     InitialLoad event,
     Emitter emit,
   ) async {
-    emit(state.copyWith(isLoading: true));
+    emit(
+      state.copyWith(
+        isLoading: true,
+        hasError: false,
+      ),
+    );
 
     final bool hasConnection = await NetworkService.hasConnection;
     emit(state.copyWith(hasConnection: hasConnection));

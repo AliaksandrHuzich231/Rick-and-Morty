@@ -6,6 +6,9 @@ abstract class  LocaleKeys {
   static const home = 'home';
   static const character_list_title = 'character_list.title';
   static const character_list_no_connection = 'character_list.no_connection';
+  static const character_list_you_are_online = 'character_list.you_are_online';
+  static const character_list_something_went_wrong = 'character_list.something_went_wrong';
+  static const character_list_no_data = 'character_list.no_data';
   static const character_list = 'character_list';
   static const character_details_location = 'character_details.location';
   static const character_details_type = 'character_details.type';

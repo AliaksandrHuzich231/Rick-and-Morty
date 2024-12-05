@@ -41,7 +41,7 @@ LazyDatabase _openConnection() {
     final File file = File(
       path.join(
         dbFolder.path,
-        LocalStorageConstants.LOCAL_DB_NAME,
+        DataConstants.LOCAL_DB_NAME,
       ),
     );
 

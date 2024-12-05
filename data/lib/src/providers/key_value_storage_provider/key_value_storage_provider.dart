@@ -1,6 +1,8 @@
 import 'package:core/core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../data.dart';
+
 final class KeyValueStorageProvider {
   final SharedPreferences _sharedPreferences;
 
@@ -22,7 +24,7 @@ final class KeyValueStorageProvider {
         await _sharedPreferences.setStringList(key, value as List<String>);
       default:
         throw const AppException(
-          message: AppConstants.UNSUPPORTED_GENERIC_TYPE,
+          message: DataConstants.UNSUPPORTED_GENERIC_TYPE,
         );
     }
   }

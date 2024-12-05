@@ -60,52 +60,66 @@ final class CacheProvider {
     final List<CharactersTableData> charactersTableDataList =
         await _database.select(_database.charactersTable).get();
 
-    return Future.wait(charactersTableDataList.map(
-      (characterTableData) async {
-        final CharacterLocationsTableData characterLocationsTableData =
-            await (_database.select(_database.characterLocationsTable)
-                  ..where(
-                      (item) => item.characterId.equals(characterTableData.id)))
-                .getSingle();
+    return Future.wait(
+      charactersTableDataList.map(
+        (CharactersTableData characterTableData) async {
+          final CharacterLocationsTableData characterLocationsTableData =
+              await (_database.select(_database.characterLocationsTable)
+                    ..where((item) =>
+                        item.characterId.equals(characterTableData.id)))
+                  .getSingle();
 
-        final List<CharactersEpisodesTableData>
-            charactersEpisodesTableDataList =
-            await (_database.select(_database.charactersEpisodesTable)
-                  ..where(
-                      (item) => item.characterId.equals(characterTableData.id)))
-                .get();
+          final List<CharactersEpisodesTableData>
+              charactersEpisodesTableDataList = await (_database.select(
+            _database.charactersEpisodesTable,
+          )..where(
+                      (item) => item.characterId.equals(
+                        characterTableData.id,
+                      ),
+                    ))
+                  .get();
 
-        final List<EpisodesTableData> episodesTableDataList = await Future.wait(
-            charactersEpisodesTableDataList
-                .map((charactersEpisodesTableData) async {
-          return await (_database.select(_database.episodesTable)
-                ..where((item) =>
-                    item.id.equals(charactersEpisodesTableData.episodeId)))
-              .getSingle();
-        }).toList());
+          final List<EpisodesTableData> episodesTableDataList =
+              await Future.wait(
+            charactersEpisodesTableDataList.map(
+              (
+                CharactersEpisodesTableData charactersEpisodesTableData,
+              ) async {
+                return await (_database.select(
+                  _database.episodesTable,
+                )..where(
+                        (item) => item.id.equals(
+                          charactersEpisodesTableData.episodeId,
+                        ),
+                      ))
+                    .getSingle();
+              },
+            ).toList(),
+          );
 
-        return CharacterEntity(
-          id: characterTableData.id,
-          name: characterTableData.name,
-          status: characterTableData.status,
-          species: characterTableData.species,
-          type: characterTableData.type,
-          gender: characterTableData.gender,
-          characterLocationEntity: CharacterLocationEntity(
-            name: characterLocationsTableData.name,
-            url: characterLocationsTableData.url,
-          ),
-          imageUrl: characterTableData.image,
-          episodes: episodesTableDataList
-              .map(
-                (episode) => episode.episode,
-              )
-              .toList(),
-          characterUrl: characterTableData.url,
-          createdAt: characterTableData.createdAt,
-        );
-      },
-    ).toList());
+          return CharacterEntity(
+            id: characterTableData.id,
+            name: characterTableData.name,
+            status: characterTableData.status,
+            species: characterTableData.species,
+            type: characterTableData.type,
+            gender: characterTableData.gender,
+            characterLocationEntity: CharacterLocationEntity(
+              name: characterLocationsTableData.name,
+              url: characterLocationsTableData.url,
+            ),
+            imageUrl: characterTableData.image,
+            episodes: episodesTableDataList
+                .map(
+                  (episode) => episode.episode,
+                )
+                .toList(),
+            characterUrl: characterTableData.url,
+            createdAt: characterTableData.createdAt,
+          );
+        },
+      ).toList(),
+    );
   }
 
   Future<void> clearAll() async {

@@ -6,7 +6,9 @@
   "character_list": {
     "title": "Character list",
     "no_connection": "No internet connection! Using local data for now. Some features may be limited.",
-    "you_are_online": "Internet connected! All features are now fully available."
+    "you_are_online": "Internet connected! All features are now fully available.",
+    "something_went_wrong": "Something went wrong, please try again",
+    "no_data": "No available data, please try again"
   },
   "character_details": {
     "location": "Location:",

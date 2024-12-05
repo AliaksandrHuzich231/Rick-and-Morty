@@ -1,10 +1,7 @@
 import 'package:core/core.dart';
 
-class ErrorHandler {
-  //final AppEventNotifier _eventNotifier;
-
-  ErrorHandler(//required AppEventNotifier eventNotifier,
-      ); // : _eventNotifier = eventNotifier;
+final class ErrorHandler {
+  const ErrorHandler();
 
   Future<Never> handleError(DioException error) async {
     final Response<dynamic>? response = error.response;
@@ -14,7 +11,6 @@ class ErrorHandler {
     }
 
     if (error.type == DioExceptionType.connectionError) {
-      //_eventNotifier.notify(const InternetConnectionLostEvent());
       throw AppException(message: AppExceptionType.noConnection.message);
     }
 
@@ -29,7 +25,6 @@ class ErrorHandler {
         }
       case 401:
         {
-          //_eventNotifier.notify(const UnauthorizedEvent());
           throw AppException(
             message: error.response?.data['message'] ??
                 AppExceptionType.notAuthorized.message,

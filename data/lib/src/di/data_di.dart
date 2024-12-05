@@ -27,7 +27,7 @@ abstract final class DataDI {
       () => ApiProvider(
         dio: locator<DioConfig>().dio,
         errorHandler: locator<ErrorHandler>(),
-        listResultField: ApiConstants.LIST_RESULT_FIELD,
+        listResultField: DataConstants.LIST_RESULT_FIELD,
       ),
     );
   }

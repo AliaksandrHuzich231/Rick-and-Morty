@@ -23,14 +23,14 @@ final class CharacterRepositoryImpl implements CharacterRepository {
 
     if (await NetworkService.hasConnection) {
       if (payload.prevPage == null && payload.nextPage == null) {
-        _cacheProvider.clearAll();
+        await _cacheProvider.clearAll();
       }
 
       final PaginatedEntity<CharacterEntity> charactersPaginatedEntity =
           await _apiProvider.object<PaginatedEntity<CharacterEntity>>(
         request: ApiRequest(
           method: HttpMethod.get,
-          url: payload.nextPage ?? ApiConstants.CHARACTERS_ENDPOINT,
+          url: payload.nextPage ?? DataConstants.CHARACTERS_ENDPOINT,
         ),
         parser: (Map<String, dynamic> json) {
           return PaginatedEntity<CharacterEntity>.fromJson(

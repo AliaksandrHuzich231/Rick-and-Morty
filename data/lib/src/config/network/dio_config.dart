@@ -10,7 +10,7 @@ final class DioConfig {
 
   DioConfig() {
     _dio
-      ..options.baseUrl = ApiConstants.BASE_URL
+      ..options.baseUrl = DataConstants.BASE_URL
       ..interceptors.addAll(
         <Interceptor>[
           const AppLogInterceptor(),

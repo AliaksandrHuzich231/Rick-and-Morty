@@ -1,8 +1,7 @@
 import '../../../domain.dart';
-import '../base_usecase.dart';
 
-final class FetchCharacterUsecase
-    extends FutureUseCase<PaginationPayload, PaginatedModel<Character>> {
+final class FetchCharacterUsecase extends FutureUseCase<
+    PaginationPayload<CharactersFilter>, PaginatedModel<Character>> {
   final CharacterRepository _characterRepository;
 
   const FetchCharacterUsecase({
@@ -10,7 +9,9 @@ final class FetchCharacterUsecase
   }) : _characterRepository = characterRepository;
 
   @override
-  Future<PaginatedModel<Character>> execute(PaginationPayload payload) async {
+  Future<PaginatedModel<Character>> execute(
+    PaginationPayload<CharactersFilter> payload,
+  ) async {
     return _characterRepository.fetchCharacters(payload);
   }
 }

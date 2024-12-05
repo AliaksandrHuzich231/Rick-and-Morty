@@ -20,14 +20,59 @@ class CharacterListScreen extends StatelessWidget {
         appRouter: appLocator.get<AppRouter>(),
         fetchCharacterUsecase: appLocator.get<FetchCharacterUsecase>(),
       ),
-      child: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text(
-            'character_list.title'.watchTr(context),
-          ),
-        ),
-        body: const _CharacterListForm(),
+      child: Builder(
+        builder: (BuildContext context) {
+          final CharacterListBloc bloc = context.read<CharacterListBloc>();
+
+          return Scaffold(
+            appBar: AppBar(
+              centerTitle: true,
+              title: Text(
+                'character_list.title'.watchTr(context),
+              ),
+              actions: <Widget>[
+                DropdownMenu<CharacterStatus>(
+                  onSelected: (CharacterStatus? characterStatus) {
+                    bloc.add(
+                      ChangeFilters(
+                        characterStatus: characterStatus,
+                      ),
+                    );
+                  },
+                  initialSelection: CharacterStatus.any,
+                  dropdownMenuEntries: CharacterStatus.values
+                      .map(
+                        (CharacterStatus value) => DropdownMenuEntry(
+                          value: value,
+                          label: value.status,
+                        ),
+                      )
+                      .toList(),
+                ),
+                const SizedBox(width: 8),
+                DropdownMenu<CharacterSpecies>(
+                  onSelected: (CharacterSpecies? characterSpecies) {
+                    bloc.add(
+                      ChangeFilters(
+                        characterSpecies: characterSpecies,
+                      ),
+                    );
+                  },
+                  initialSelection: CharacterSpecies.any,
+                  dropdownMenuEntries: CharacterSpecies.values
+                      .map(
+                        (CharacterSpecies value) => DropdownMenuEntry(
+                          value: value,
+                          label: value.species,
+                        ),
+                      )
+                      .toList(),
+                ),
+              ],
+            ),
+            body: const _CharacterListForm(),
+          );
+        },
       ),
     );
   }

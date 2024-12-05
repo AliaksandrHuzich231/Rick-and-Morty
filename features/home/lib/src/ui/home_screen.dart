@@ -1,6 +1,4 @@
 import 'package:core/core.dart';
-import 'package:core_ui/core_ui.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:navigation/navigation.dart';
 import 'package:settings/settings.dart';

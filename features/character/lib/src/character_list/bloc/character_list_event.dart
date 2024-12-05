@@ -8,6 +8,16 @@ final class InitialLoad extends CharacterListEvent {}
 
 final class LoadCharacters extends CharacterListEvent {}
 
+final class ChangeFilters extends CharacterListEvent {
+  final CharacterSpecies? characterSpecies;
+  final CharacterStatus? characterStatus;
+
+  const ChangeFilters({
+    this.characterSpecies,
+    this.characterStatus,
+  });
+}
+
 final class ChangeInternetConnectionStatus extends CharacterListEvent {
   final bool hasConnection;
 

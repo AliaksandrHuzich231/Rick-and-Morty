@@ -2,6 +2,8 @@ part 'character_location.dart';
 
 part 'character_enums.dart';
 
+part 'character_filter.dart';
+
 final class Character {
   final int id;
   final String name;

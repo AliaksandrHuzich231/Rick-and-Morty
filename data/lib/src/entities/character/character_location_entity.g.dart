@@ -12,3 +12,10 @@ CharacterLocationEntity _$CharacterLocationEntityFromJson(
       name: json['name'] as String,
       url: json['url'] as String,
     );
+
+Map<String, dynamic> _$CharacterLocationEntityToJson(
+        CharacterLocationEntity instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'url': instance.url,
+    };

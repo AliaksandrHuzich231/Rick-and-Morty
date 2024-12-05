@@ -1,8 +1,8 @@
-import 'package:core/core.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'character_location_entity.g.dart';
 
-@JsonSerializable(createToJson: false)
+@JsonSerializable()
 final class CharacterLocationEntity extends JsonSerializable {
   final String name;
   final String url;
@@ -15,4 +15,7 @@ final class CharacterLocationEntity extends JsonSerializable {
   factory CharacterLocationEntity.fromJson(Map<String, dynamic> json) {
     return _$CharacterLocationEntityFromJson(json);
   }
+
+  @override
+  Map<String, dynamic> toJson() => _$CharacterLocationEntityToJson(this);
 }

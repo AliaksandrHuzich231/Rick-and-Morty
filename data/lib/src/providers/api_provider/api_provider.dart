@@ -2,22 +2,23 @@ import 'dart:io';
 
 import 'package:core/core.dart';
 
+import '../../errors/error_handler.dart';
 import 'api_request.dart';
 import 'api_request_options.dart';
 
 class ApiProvider {
   final Dio _dio;
 
-  //final ErrorHandler _errorHandler;
+  final ErrorHandler _errorHandler;
 
   final String _listResultField;
 
   const ApiProvider({
     required Dio dio,
-    //required ErrorHandler errorHandler,
+    required ErrorHandler errorHandler,
     required String listResultField,
   })  : _dio = dio,
-        //_errorHandler = errorHandler,
+        _errorHandler = errorHandler,
         _listResultField = listResultField;
 
   Future<T> object<T>({
@@ -108,12 +109,12 @@ class ApiProvider {
       }
 
       if (options.useErrorHandler) {
-        //await _errorHandler.handleError(e);
+        await _errorHandler.handleError(e);
       } else {
-        //throw AppException(message: e.toString());
+        throw AppException(message: e.toString());
       }
     } catch (e) {
-      //throw AppException(message: e.toString());
+      throw AppException(message: e.toString());
     }
   }
 }

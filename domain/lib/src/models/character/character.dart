@@ -1,4 +1,4 @@
-part 'location.dart';
+part 'character_location.dart';
 
 part 'character_enums.dart';
 

@@ -17,7 +17,15 @@ class SettingsScreen extends StatelessWidget {
       create: (_) => SettingsBloc(
         appRouter: appLocator.get<AppRouter>(),
       ),
-      child: const _SettingsForm(),
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            'settings.title'.watchTr(context),
+          ),
+        ),
+        body: const _SettingsForm(),
+      ),
     );
   }
 }

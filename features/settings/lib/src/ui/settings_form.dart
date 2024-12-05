@@ -7,39 +7,30 @@ class _SettingsForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(
       builder: (_, ThemeState state) {
-        return Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            title: Text(
-              'settings.title'.watchTr(context),
-            ),
-          ),
-          body: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: <Widget>[
-                Text(
-                  'settings.light_theme'.watchTr(context),
-                ),
-                const SizedBox(width: 8),
-                Switch(
-                  value: state.appTheme != AppTheme.lightTheme,
-                  onChanged: (bool value) {
-                    context.read<ThemeBloc>().add(
-                          ChangeThemeEvent(
-                            appTheme: value
-                                ? AppTheme.darkTheme
-                                : AppTheme.lightTheme,
-                          ),
-                        );
-                  },
-                ),
-                const SizedBox(width: 8),
-                Text(
-                  'settings.dark_theme'.watchTr(context),
-                ),
-              ],
-            ),
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: <Widget>[
+              Text(
+                'settings.light_theme'.watchTr(context),
+              ),
+              const SizedBox(width: 8),
+              Switch(
+                value: state.appTheme != AppTheme.lightTheme,
+                onChanged: (bool value) {
+                  context.read<ThemeBloc>().add(
+                        ChangeThemeEvent(
+                          appTheme:
+                              value ? AppTheme.darkTheme : AppTheme.lightTheme,
+                        ),
+                      );
+                },
+              ),
+              const SizedBox(width: 8),
+              Text(
+                'settings.dark_theme'.watchTr(context),
+              ),
+            ],
           ),
         );
       },

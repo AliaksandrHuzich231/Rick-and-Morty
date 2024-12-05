@@ -3,7 +3,7 @@ import 'package:domain/domain.dart' as domain;
 import '../../../data.dart';
 import '../base_mapper.dart';
 
-class CharacterLocationMapper
+final class CharacterLocationMapper
     implements Mapper<CharacterLocationEntity, domain.CharacterLocation> {
   const CharacterLocationMapper();
 

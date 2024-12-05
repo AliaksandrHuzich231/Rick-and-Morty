@@ -1,5 +1,4 @@
 import 'package:core/core.dart';
-import 'package:domain/domain.dart';
 import 'package:navigation/navigation.dart';
 
 part 'character_details_event.dart';
@@ -12,12 +11,9 @@ class CharacterDetailsBloc
 
   CharacterDetailsBloc({
     required AppRouter appRouter,
-    required Character character,
   })  : _appRouter = appRouter,
         super(
-          CharacterDetailsState(
-            character: character,
-          ),
+          const CharacterDetailsState(),
         ) {
     on<BackToCharacterListPage>(_onBackToCharacterListPage);
   }

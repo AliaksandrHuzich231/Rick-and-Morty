@@ -57,6 +57,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.18.0"
+  convert:
+    dependency: transitive
+    description:
+      name: convert
+      sha256: b30acd5944035672bc15c6b7a8b47d773e41e2f17de064350988c5d02adb1c68
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.2"
   core:
     dependency: "direct main"
     description:
@@ -94,6 +102,14 @@ packages:
       relative: true
     source: path
     version: "0.0.0"
+  drift:
+    dependency: transitive
+    description:
+      name: drift
+      sha256: c2d073d35ad441730812f4ea05b5dd031fb81c5f9786a4f5fb77ecd6307b6f74
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.22.1"
   easy_localization:
     dependency: transitive
     description:
@@ -226,6 +242,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.1"
+  logger:
+    dependency: transitive
+    description:
+      name: logger
+      sha256: be4b23575aac7ebf01f225a241eb7f6b5641eeaf43c6a8613510fc2f8cf187d1
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.5.0"
   matcher:
     dependency: transitive
     description:
@@ -274,6 +298,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.0"
+  path_provider:
+    dependency: transitive
+    description:
+      name: path_provider
+      sha256: "50c5dd5b6e1aaf6fb3a78b33f6aa3afca52bf903a8a5298f53101fdaee55bbcd"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.5"
+  path_provider_android:
+    dependency: transitive
+    description:
+      name: path_provider_android
+      sha256: "8c4967f8b7cb46dc914e178daa29813d83ae502e0529d7b0478330616a691ef7"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.14"
+  path_provider_foundation:
+    dependency: transitive
+    description:
+      name: path_provider_foundation
+      sha256: f234384a3fdd67f989b4d54a5d73ca2a6c422fa55ae694381ae0f4375cd1ea16
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.0"
   path_provider_linux:
     dependency: transitive
     description:
@@ -391,46 +439,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.10.0"
-  sqflite:
+  sqlite3:
     dependency: transitive
     description:
-      name: sqflite
-      sha256: "2d7299468485dca85efeeadf5d38986909c5eb0cd71fd3db2c2f000e6c9454bb"
+      name: sqlite3
+      sha256: cb7f4e9dc1b52b1fa350f7b3d41c662e75fc3d399555fa4e5efcf267e9a4fbb5
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.1"
-  sqflite_android:
+    version: "2.5.0"
+  sqlite3_flutter_libs:
     dependency: transitive
     description:
-      name: sqflite_android
-      sha256: "78f489aab276260cdd26676d2169446c7ecd3484bbd5fead4ca14f3ed4dd9ee3"
+      name: sqlite3_flutter_libs
+      sha256: "7ae52b23366e5295005022e62fa093f64bfe190810223ea0ebf733a4cd140bce"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.0"
-  sqflite_common:
-    dependency: transitive
-    description:
-      name: sqflite_common
-      sha256: "761b9740ecbd4d3e66b8916d784e581861fd3c3553eda85e167bc49fdb68f709"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.5.4+6"
-  sqflite_darwin:
-    dependency: transitive
-    description:
-      name: sqflite_darwin
-      sha256: "96a698e2bc82bd770a4d6aab00b42396a7c63d9e33513a56945cbccb594c2474"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.4.1"
-  sqflite_platform_interface:
-    dependency: transitive
-    description:
-      name: sqflite_platform_interface
-      sha256: "8dd4515c7bdcae0a785b0062859336de775e8c65db81ae33dd5445f35be61920"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.4.0"
+    version: "0.5.26"
   stack_trace:
     dependency: transitive
     description:
@@ -455,14 +479,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
-  synchronized:
-    dependency: transitive
-    description:
-      name: synchronized
-      sha256: "69fe30f3a8b04a0be0c15ae6490fc859a78ef4c43ae2dd5e8a623d45bfcf9225"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.3.0+3"
   term_glyph:
     dependency: transitive
     description:

@@ -1,5 +1,7 @@
 import 'package:domain/domain.dart';
 
 abstract interface class CharacterRepository {
-  Future<List<Character>> fetchCharacters(FetchCharactersPayload payload);
+  Future<PaginatedModel<Character>> fetchCharacters(
+    PaginationPayload payload,
+  );
 }

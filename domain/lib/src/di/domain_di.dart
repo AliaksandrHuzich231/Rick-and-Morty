@@ -1,6 +1,5 @@
 import 'package:core/core.dart';
 import 'package:domain/domain.dart';
-import 'package:domain/src/usecases/character/fetch_characters_usecase.dart';
 
 abstract final class DomainDI {
   static void initDependencies(GetIt locator) {

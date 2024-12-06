@@ -22,7 +22,9 @@ final class CharacterRepositoryImpl implements CharacterRepository {
     PaginatedModel<Character> charactersPaginatedModel = PaginatedModel.empty();
 
     if (await NetworkService.hasConnection) {
-      if (payload.prevPage == null && payload.nextPage == null) {
+      if (payload.prevPage == null &&
+          payload.nextPage == null &&
+          payload.lastObjectId == null) {
         await _cacheProvider.clearAll();
       }
 
@@ -53,16 +55,14 @@ final class CharacterRepositoryImpl implements CharacterRepository {
         },
       );
 
-      if (!(isStatusFilter || isSpeciesFilter)) {
-        await _cacheProvider.addCharacters(charactersPaginatedEntity.results);
-      }
+      await _cacheProvider.addCharacters(charactersPaginatedEntity.results);
 
       charactersPaginatedModel =
           MapperFactory.paginatedMapper<CharacterEntity, Character>()
               .fromEntity(
         charactersPaginatedEntity,
       );
-    } else if (payload.lastObjectId == null) {
+    } else {
       final List<CharacterEntity> characters =
           await _cacheProvider.fetchAllCharacters();
 

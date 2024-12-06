@@ -74,27 +74,51 @@ class CharacterListBloc extends Bloc<CharacterListEvent, CharacterListState> {
       final PaginatedModel<Character> charactersPaginatedModel =
           await _fetchCharacterUsecase.execute(
         PaginationPayload(
-          lastObjectId: state.filteredCharacters.lastOrNull?.id,
+          lastObjectId: state.characters.lastOrNull?.id,
           nextPage: state.filteredLastPaginatedPageInfo.next,
           prevPage: state.filteredLastPaginatedPageInfo.prev,
           filter: state.charactersFilter,
         ),
       );
 
-      if (!state.isFiltered) {
+      if (charactersPaginatedModel.info == PaginationInfo.fromCache()) {
         emit(
           state.copyWith(
-            characters: state.characters + charactersPaginatedModel.results,
+            characters: charactersPaginatedModel.results,
             lastPaginatedPageInfo: charactersPaginatedModel.info,
+          ),
+        );
+
+        final List<Character> newFilteredList = _filterCharacters(
+          state.characters,
+        );
+
+        emit(
+          state.copyWith(
+            filteredLastPaginatedPageInfo: PaginationInfo.fromCache(),
+            filteredCharacters: newFilteredList,
+          ),
+        );
+      } else {
+        if (!state.isFiltered) {
+          emit(
+            state.copyWith(
+              characters: state.characters + charactersPaginatedModel.results,
+              lastPaginatedPageInfo: charactersPaginatedModel.info,
+            ),
+          );
+        }
+        emit(
+          state.copyWith(
+            filteredLastPaginatedPageInfo: charactersPaginatedModel.info,
+            filteredCharacters:
+                state.filteredCharacters + charactersPaginatedModel.results,
           ),
         );
       }
 
       emit(
         state.copyWith(
-          filteredCharacters:
-              state.filteredCharacters + charactersPaginatedModel.results,
-          filteredLastPaginatedPageInfo: charactersPaginatedModel.info,
           isLoading: false,
           isLoadingItems: false,
         ),
@@ -131,17 +155,7 @@ class CharacterListBloc extends Bloc<CharacterListEvent, CharacterListState> {
           filteredLastPaginatedPageInfo: PaginationInfo.empty(),
         ),
       );
-      if (state.isFiltered) {
-        add(LoadCharacters());
-      } else {
-        emit(
-          state.copyWith(
-            filteredCharacters: state.characters,
-            filteredLastPaginatedPageInfo: state.lastPaginatedPageInfo,
-            isLoading: false,
-          ),
-        );
-      }
+      add(LoadCharacters());
     } else {
       if (state.isFiltered) {
         final List<Character> newFilteredList = _filterCharacters(
@@ -212,19 +226,7 @@ class CharacterListBloc extends Bloc<CharacterListEvent, CharacterListState> {
           filteredLastPaginatedPageInfo: PaginationInfo.empty(),
         ),
       );
-
-      add(InitialLoad());
-    } else {
-      final List<Character> newFilteredList = _filterCharacters(
-        state.characters,
-      );
-
-      emit(
-        state.copyWith(
-          filteredLastPaginatedPageInfo: PaginationInfo.fromCache(),
-          filteredCharacters: newFilteredList,
-        ),
-      );
     }
+    add(InitialLoad());
   }
 }

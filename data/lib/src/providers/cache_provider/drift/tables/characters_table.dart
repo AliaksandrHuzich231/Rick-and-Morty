@@ -18,4 +18,7 @@ class CharactersTable extends Table {
   TextColumn get url => text()();
 
   TextColumn get createdAt => text()();
+
+  @override
+  Set<Column<Object>> get primaryKey => {id};
 }

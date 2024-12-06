@@ -1,6 +1,7 @@
 part of 'character.dart';
 
 enum CharacterStatus {
+  any('Any'),
   alive('Alive'),
   dead('Dead'),
   unknown('unknown');
@@ -11,6 +12,7 @@ enum CharacterStatus {
 }
 
 enum CharacterSpecies {
+  any('Any'),
   alien('Alien'),
   human('Human');
 

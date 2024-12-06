@@ -62,10 +62,10 @@ class _CharacterListFormState extends State<_CharacterListForm> {
             onRetry: () => bloc.add(InitialLoad()),
             message: 'character_list.something_went_wrong'.watchTr(context),
           );
-        } else if (state.characters.isEmpty) {
+        } else if (state.filteredCharacters.isEmpty) {
           return CharactersListRetry(
             onRetry: () => bloc.add(InitialLoad()),
-            message: 'character_list.no data'.watchTr(context),
+            message: 'character_list.no_data'.watchTr(context),
           );
         } else {
           return ListView.separated(
@@ -75,17 +75,17 @@ class _CharacterListFormState extends State<_CharacterListForm> {
                 onTap: () {
                   bloc.add(
                     MoveToDetailsPage(
-                      character: state.characters[index],
+                      character: state.filteredCharacters[index],
                     ),
                   );
                 },
-                character: state.characters[index],
+                character: state.filteredCharacters[index],
               );
             },
             separatorBuilder: (BuildContext context, int index) {
               return const SizedBox(height: 8);
             },
-            itemCount: state.characters.length,
+            itemCount: state.filteredCharacters.length,
           );
         }
       },

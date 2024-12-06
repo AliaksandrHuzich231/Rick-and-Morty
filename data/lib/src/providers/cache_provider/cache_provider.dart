@@ -1,5 +1,6 @@
 import 'package:data/data.dart';
 import 'package:data/src/providers/cache_provider/drift/database/drift_database.dart';
+import 'package:drift/drift.dart';
 
 final class CacheProvider {
   final AppDatabase _database;
@@ -9,13 +10,13 @@ final class CacheProvider {
   }) : _database = database;
 
   Future<void> addCharacters(List<CharacterEntity> characters) async {
-    Future.wait(
+    await Future.wait(
       characters.map(
         (CharacterEntity characterEntity) async {
           final int characterId =
               await _database.into(_database.charactersTable).insert(
                     CharactersTableCompanion.insert(
-                      id: characterEntity.id,
+                      id: Value<int>(characterEntity.id),
                       name: characterEntity.name,
                       status: characterEntity.status,
                       species: characterEntity.species,
@@ -25,11 +26,12 @@ final class CacheProvider {
                       url: characterEntity.characterUrl,
                       createdAt: characterEntity.createdAt,
                     ),
+                    mode: InsertMode.insertOrIgnore,
                   );
 
           await _database.into(_database.characterLocationsTable).insert(
                 CharacterLocationsTableCompanion.insert(
-                  characterId: characterId,
+                  characterId: Value<int>(characterId),
                   name: characterEntity.characterLocationEntity.name,
                   url: characterEntity.characterLocationEntity.url,
                 ),
@@ -42,12 +44,14 @@ final class CacheProvider {
                         EpisodesTableCompanion.insert(
                           episode: episode,
                         ),
+                    mode: InsertMode.insertOrIgnore,
                       );
               await _database.into(_database.charactersEpisodesTable).insert(
                     CharactersEpisodesTableCompanion.insert(
                       characterId: characterId,
                       episodeId: episodeId,
                     ),
+                    mode: InsertMode.insertOrIgnore,
                   );
             },
           );

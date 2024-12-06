@@ -17,20 +17,35 @@ final class CharacterRepositoryImpl implements CharacterRepository {
 
   @override
   Future<PaginatedModel<Character>> fetchCharacters(
-    PaginationPayload payload,
+    PaginationPayload<CharactersFilter> payload,
   ) async {
     PaginatedModel<Character> charactersPaginatedModel = PaginatedModel.empty();
 
     if (await NetworkService.hasConnection) {
-      if (payload.prevPage == null && payload.nextPage == null) {
+      if (payload.prevPage == null &&
+          payload.nextPage == null &&
+          payload.lastObjectId == null) {
         await _cacheProvider.clearAll();
       }
+
+      final bool isSpeciesFilter =
+          payload.filter.characterSpecies != CharacterSpecies.any;
+      final bool isStatusFilter =
+          payload.filter.characterStatus != CharacterStatus.any;
 
       final PaginatedEntity<CharacterEntity> charactersPaginatedEntity =
           await _apiProvider.object<PaginatedEntity<CharacterEntity>>(
         request: ApiRequest(
           method: HttpMethod.get,
           url: payload.nextPage ?? DataConstants.CHARACTERS_ENDPOINT,
+          params: {
+            if (isSpeciesFilter)
+              DataConstants.CHARACTERS_SPECIES_FILTER:
+                  payload.filter.characterSpecies.species,
+            if (isStatusFilter)
+              DataConstants.CHARACTERS_STATUS_FILTER:
+                  payload.filter.characterStatus.status,
+          },
         ),
         parser: (Map<String, dynamic> json) {
           return PaginatedEntity<CharacterEntity>.fromJson(
@@ -47,7 +62,7 @@ final class CharacterRepositoryImpl implements CharacterRepository {
               .fromEntity(
         charactersPaginatedEntity,
       );
-    } else if (payload.lastObjectId == null) {
+    } else {
       final List<CharacterEntity> characters =
           await _cacheProvider.fetchAllCharacters();
 

@@ -13,7 +13,7 @@ class $CharactersTableTable extends CharactersTable
   @override
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
+      type: DriftSqlType.int, requiredDuringInsert: false);
   static const VerificationMeta _nameMeta = const VerificationMeta('name');
   @override
   late final GeneratedColumn<String> name = GeneratedColumn<String>(
@@ -72,8 +72,6 @@ class $CharactersTableTable extends CharactersTable
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
-    } else if (isInserting) {
-      context.missing(_idMeta);
     }
     if (data.containsKey('name')) {
       context.handle(
@@ -127,7 +125,7 @@ class $CharactersTableTable extends CharactersTable
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => const {};
+  Set<GeneratedColumn> get $primaryKey => {id};
   @override
   CharactersTableData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
@@ -319,7 +317,6 @@ class CharactersTableCompanion extends UpdateCompanion<CharactersTableData> {
   final Value<String> image;
   final Value<String> url;
   final Value<String> createdAt;
-  final Value<int> rowid;
   const CharactersTableCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
@@ -330,10 +327,9 @@ class CharactersTableCompanion extends UpdateCompanion<CharactersTableData> {
     this.image = const Value.absent(),
     this.url = const Value.absent(),
     this.createdAt = const Value.absent(),
-    this.rowid = const Value.absent(),
   });
   CharactersTableCompanion.insert({
-    required int id,
+    this.id = const Value.absent(),
     required String name,
     required String status,
     required String species,
@@ -342,9 +338,7 @@ class CharactersTableCompanion extends UpdateCompanion<CharactersTableData> {
     required String image,
     required String url,
     required String createdAt,
-    this.rowid = const Value.absent(),
-  })  : id = Value(id),
-        name = Value(name),
+  })  : name = Value(name),
         status = Value(status),
         species = Value(species),
         type = Value(type),
@@ -362,7 +356,6 @@ class CharactersTableCompanion extends UpdateCompanion<CharactersTableData> {
     Expression<String>? image,
     Expression<String>? url,
     Expression<String>? createdAt,
-    Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -374,7 +367,6 @@ class CharactersTableCompanion extends UpdateCompanion<CharactersTableData> {
       if (image != null) 'image': image,
       if (url != null) 'url': url,
       if (createdAt != null) 'created_at': createdAt,
-      if (rowid != null) 'rowid': rowid,
     });
   }
 
@@ -387,8 +379,7 @@ class CharactersTableCompanion extends UpdateCompanion<CharactersTableData> {
       Value<String>? gender,
       Value<String>? image,
       Value<String>? url,
-      Value<String>? createdAt,
-      Value<int>? rowid}) {
+      Value<String>? createdAt}) {
     return CharactersTableCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
@@ -399,7 +390,6 @@ class CharactersTableCompanion extends UpdateCompanion<CharactersTableData> {
       image: image ?? this.image,
       url: url ?? this.url,
       createdAt: createdAt ?? this.createdAt,
-      rowid: rowid ?? this.rowid,
     );
   }
 
@@ -433,9 +423,6 @@ class CharactersTableCompanion extends UpdateCompanion<CharactersTableData> {
     if (createdAt.present) {
       map['created_at'] = Variable<String>(createdAt.value);
     }
-    if (rowid.present) {
-      map['rowid'] = Variable<int>(rowid.value);
-    }
     return map;
   }
 
@@ -450,8 +437,7 @@ class CharactersTableCompanion extends UpdateCompanion<CharactersTableData> {
           ..write('gender: $gender, ')
           ..write('image: $image, ')
           ..write('url: $url, ')
-          ..write('createdAt: $createdAt, ')
-          ..write('rowid: $rowid')
+          ..write('createdAt: $createdAt')
           ..write(')'))
         .toString();
   }
@@ -463,21 +449,12 @@ class $CharacterLocationsTableTable extends CharacterLocationsTable
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
   $CharacterLocationsTableTable(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _idMeta = const VerificationMeta('id');
-  @override
-  late final GeneratedColumn<int> id = GeneratedColumn<int>(
-      'id', aliasedName, false,
-      hasAutoIncrement: true,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
   static const VerificationMeta _characterIdMeta =
       const VerificationMeta('characterId');
   @override
   late final GeneratedColumn<int> characterId = GeneratedColumn<int>(
       'character_id', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
+      type: DriftSqlType.int, requiredDuringInsert: false);
   static const VerificationMeta _nameMeta = const VerificationMeta('name');
   @override
   late final GeneratedColumn<String> name = GeneratedColumn<String>(
@@ -489,7 +466,7 @@ class $CharacterLocationsTableTable extends CharacterLocationsTable
       'url', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
   @override
-  List<GeneratedColumn> get $columns => [id, characterId, name, url];
+  List<GeneratedColumn> get $columns => [characterId, name, url];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -501,16 +478,11 @@ class $CharacterLocationsTableTable extends CharacterLocationsTable
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
-    if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
-    }
     if (data.containsKey('character_id')) {
       context.handle(
           _characterIdMeta,
           characterId.isAcceptableOrUnknown(
               data['character_id']!, _characterIdMeta));
-    } else if (isInserting) {
-      context.missing(_characterIdMeta);
     }
     if (data.containsKey('name')) {
       context.handle(
@@ -528,14 +500,12 @@ class $CharacterLocationsTableTable extends CharacterLocationsTable
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => {id};
+  Set<GeneratedColumn> get $primaryKey => {characterId};
   @override
   CharacterLocationsTableData map(Map<String, dynamic> data,
       {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return CharacterLocationsTableData(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
       characterId: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}character_id'])!,
       name: attachedDatabase.typeMapping
@@ -553,19 +523,14 @@ class $CharacterLocationsTableTable extends CharacterLocationsTable
 
 class CharacterLocationsTableData extends DataClass
     implements Insertable<CharacterLocationsTableData> {
-  final int id;
   final int characterId;
   final String name;
   final String url;
   const CharacterLocationsTableData(
-      {required this.id,
-      required this.characterId,
-      required this.name,
-      required this.url});
+      {required this.characterId, required this.name, required this.url});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    map['id'] = Variable<int>(id);
     map['character_id'] = Variable<int>(characterId);
     map['name'] = Variable<String>(name);
     map['url'] = Variable<String>(url);
@@ -574,7 +539,6 @@ class CharacterLocationsTableData extends DataClass
 
   CharacterLocationsTableCompanion toCompanion(bool nullToAbsent) {
     return CharacterLocationsTableCompanion(
-      id: Value(id),
       characterId: Value(characterId),
       name: Value(name),
       url: Value(url),
@@ -585,7 +549,6 @@ class CharacterLocationsTableData extends DataClass
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return CharacterLocationsTableData(
-      id: serializer.fromJson<int>(json['id']),
       characterId: serializer.fromJson<int>(json['characterId']),
       name: serializer.fromJson<String>(json['name']),
       url: serializer.fromJson<String>(json['url']),
@@ -595,7 +558,6 @@ class CharacterLocationsTableData extends DataClass
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'id': serializer.toJson<int>(id),
       'characterId': serializer.toJson<int>(characterId),
       'name': serializer.toJson<String>(name),
       'url': serializer.toJson<String>(url),
@@ -603,9 +565,8 @@ class CharacterLocationsTableData extends DataClass
   }
 
   CharacterLocationsTableData copyWith(
-          {int? id, int? characterId, String? name, String? url}) =>
+          {int? characterId, String? name, String? url}) =>
       CharacterLocationsTableData(
-        id: id ?? this.id,
         characterId: characterId ?? this.characterId,
         name: name ?? this.name,
         url: url ?? this.url,
@@ -613,7 +574,6 @@ class CharacterLocationsTableData extends DataClass
   CharacterLocationsTableData copyWithCompanion(
       CharacterLocationsTableCompanion data) {
     return CharacterLocationsTableData(
-      id: data.id.present ? data.id.value : this.id,
       characterId:
           data.characterId.present ? data.characterId.value : this.characterId,
       name: data.name.present ? data.name.value : this.name,
@@ -624,7 +584,6 @@ class CharacterLocationsTableData extends DataClass
   @override
   String toString() {
     return (StringBuffer('CharacterLocationsTableData(')
-          ..write('id: $id, ')
           ..write('characterId: $characterId, ')
           ..write('name: $name, ')
           ..write('url: $url')
@@ -633,12 +592,11 @@ class CharacterLocationsTableData extends DataClass
   }
 
   @override
-  int get hashCode => Object.hash(id, characterId, name, url);
+  int get hashCode => Object.hash(characterId, name, url);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is CharacterLocationsTableData &&
-          other.id == this.id &&
           other.characterId == this.characterId &&
           other.name == this.name &&
           other.url == this.url);
@@ -646,32 +604,26 @@ class CharacterLocationsTableData extends DataClass
 
 class CharacterLocationsTableCompanion
     extends UpdateCompanion<CharacterLocationsTableData> {
-  final Value<int> id;
   final Value<int> characterId;
   final Value<String> name;
   final Value<String> url;
   const CharacterLocationsTableCompanion({
-    this.id = const Value.absent(),
     this.characterId = const Value.absent(),
     this.name = const Value.absent(),
     this.url = const Value.absent(),
   });
   CharacterLocationsTableCompanion.insert({
-    this.id = const Value.absent(),
-    required int characterId,
+    this.characterId = const Value.absent(),
     required String name,
     required String url,
-  })  : characterId = Value(characterId),
-        name = Value(name),
+  })  : name = Value(name),
         url = Value(url);
   static Insertable<CharacterLocationsTableData> custom({
-    Expression<int>? id,
     Expression<int>? characterId,
     Expression<String>? name,
     Expression<String>? url,
   }) {
     return RawValuesInsertable({
-      if (id != null) 'id': id,
       if (characterId != null) 'character_id': characterId,
       if (name != null) 'name': name,
       if (url != null) 'url': url,
@@ -679,12 +631,8 @@ class CharacterLocationsTableCompanion
   }
 
   CharacterLocationsTableCompanion copyWith(
-      {Value<int>? id,
-      Value<int>? characterId,
-      Value<String>? name,
-      Value<String>? url}) {
+      {Value<int>? characterId, Value<String>? name, Value<String>? url}) {
     return CharacterLocationsTableCompanion(
-      id: id ?? this.id,
       characterId: characterId ?? this.characterId,
       name: name ?? this.name,
       url: url ?? this.url,
@@ -694,9 +642,6 @@ class CharacterLocationsTableCompanion
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (id.present) {
-      map['id'] = Variable<int>(id.value);
-    }
     if (characterId.present) {
       map['character_id'] = Variable<int>(characterId.value);
     }
@@ -712,7 +657,6 @@ class CharacterLocationsTableCompanion
   @override
   String toString() {
     return (StringBuffer('CharacterLocationsTableCompanion(')
-          ..write('id: $id, ')
           ..write('characterId: $characterId, ')
           ..write('name: $name, ')
           ..write('url: $url')
@@ -1128,7 +1072,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
 
 typedef $$CharactersTableTableCreateCompanionBuilder = CharactersTableCompanion
     Function({
-  required int id,
+  Value<int> id,
   required String name,
   required String status,
   required String species,
@@ -1137,7 +1081,6 @@ typedef $$CharactersTableTableCreateCompanionBuilder = CharactersTableCompanion
   required String image,
   required String url,
   required String createdAt,
-  Value<int> rowid,
 });
 typedef $$CharactersTableTableUpdateCompanionBuilder = CharactersTableCompanion
     Function({
@@ -1150,7 +1093,6 @@ typedef $$CharactersTableTableUpdateCompanionBuilder = CharactersTableCompanion
   Value<String> image,
   Value<String> url,
   Value<String> createdAt,
-  Value<int> rowid,
 });
 
 class $$CharactersTableTableFilterComposer
@@ -1300,7 +1242,6 @@ class $$CharactersTableTableTableManager extends RootTableManager<
             Value<String> image = const Value.absent(),
             Value<String> url = const Value.absent(),
             Value<String> createdAt = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
           }) =>
               CharactersTableCompanion(
             id: id,
@@ -1312,10 +1253,9 @@ class $$CharactersTableTableTableManager extends RootTableManager<
             image: image,
             url: url,
             createdAt: createdAt,
-            rowid: rowid,
           ),
           createCompanionCallback: ({
-            required int id,
+            Value<int> id = const Value.absent(),
             required String name,
             required String status,
             required String species,
@@ -1324,7 +1264,6 @@ class $$CharactersTableTableTableManager extends RootTableManager<
             required String image,
             required String url,
             required String createdAt,
-            Value<int> rowid = const Value.absent(),
           }) =>
               CharactersTableCompanion.insert(
             id: id,
@@ -1336,7 +1275,6 @@ class $$CharactersTableTableTableManager extends RootTableManager<
             image: image,
             url: url,
             createdAt: createdAt,
-            rowid: rowid,
           ),
           withReferenceMapper: (p0) => p0
               .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
@@ -1362,14 +1300,12 @@ typedef $$CharactersTableTableProcessedTableManager = ProcessedTableManager<
     PrefetchHooks Function()>;
 typedef $$CharacterLocationsTableTableCreateCompanionBuilder
     = CharacterLocationsTableCompanion Function({
-  Value<int> id,
-  required int characterId,
+  Value<int> characterId,
   required String name,
   required String url,
 });
 typedef $$CharacterLocationsTableTableUpdateCompanionBuilder
     = CharacterLocationsTableCompanion Function({
-  Value<int> id,
   Value<int> characterId,
   Value<String> name,
   Value<String> url,
@@ -1384,9 +1320,6 @@ class $$CharacterLocationsTableTableFilterComposer
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnFilters<int> get id => $composableBuilder(
-      column: $table.id, builder: (column) => ColumnFilters(column));
-
   ColumnFilters<int> get characterId => $composableBuilder(
       column: $table.characterId, builder: (column) => ColumnFilters(column));
 
@@ -1406,9 +1339,6 @@ class $$CharacterLocationsTableTableOrderingComposer
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnOrderings<int> get id => $composableBuilder(
-      column: $table.id, builder: (column) => ColumnOrderings(column));
-
   ColumnOrderings<int> get characterId => $composableBuilder(
       column: $table.characterId, builder: (column) => ColumnOrderings(column));
 
@@ -1428,9 +1358,6 @@ class $$CharacterLocationsTableTableAnnotationComposer
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  GeneratedColumn<int> get id =>
-      $composableBuilder(column: $table.id, builder: (column) => column);
-
   GeneratedColumn<int> get characterId => $composableBuilder(
       column: $table.characterId, builder: (column) => column);
 
@@ -1472,25 +1399,21 @@ class $$CharacterLocationsTableTableTableManager extends RootTableManager<
               $$CharacterLocationsTableTableAnnotationComposer(
                   $db: db, $table: table),
           updateCompanionCallback: ({
-            Value<int> id = const Value.absent(),
             Value<int> characterId = const Value.absent(),
             Value<String> name = const Value.absent(),
             Value<String> url = const Value.absent(),
           }) =>
               CharacterLocationsTableCompanion(
-            id: id,
             characterId: characterId,
             name: name,
             url: url,
           ),
           createCompanionCallback: ({
-            Value<int> id = const Value.absent(),
-            required int characterId,
+            Value<int> characterId = const Value.absent(),
             required String name,
             required String url,
           }) =>
               CharacterLocationsTableCompanion.insert(
-            id: id,
             characterId: characterId,
             name: name,
             url: url,
